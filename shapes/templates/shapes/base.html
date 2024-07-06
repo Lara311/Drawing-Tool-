@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}My Shapes Project{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'shapes/style.css' %}">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'draw_shape' %}">Draw Shape</a></li>
+            <li><a href="{% url 'ideas' %}">Ideas</a></li>
+        </ul>
+    </nav>
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

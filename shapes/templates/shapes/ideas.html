@@ -1,0 +1,12 @@
+{% extends 'shapes/base.html' %}
+
+{% block title %}Ideas{% endblock %}
+
+{% block content %}
+<h1>Do you have a suggestion?</h1>
+<form method="POST">
+    {% csrf_token %}
+    <textarea name="suggestion" rows="4" cols="50" placeholder="Write your suggestion here..." required></textarea><br><br>
+    <button type="submit">Submit</button>
+</form>
+{% endblock %}

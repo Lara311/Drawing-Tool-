@@ -1,0 +1,104 @@
+{% extends 'shapes/base.html' %}
+
+{% block title %}Draw A Shape{% endblock %}
+
+{% block content %}
+<h1>Draw A Shape</h1>
+<form method="POST" action="{% url 'update_floor' %}">
+    {% csrf_token %}
+    <div class="form-section">
+        <h2>Customize Your Floor</h2>
+        <div class="form-group">
+            <div>
+                <label for="floor_width">Width:</label>
+                <input type="number" id="floor_width" name="floor_width" value="{{ floor.width }}" required>
+            </div>
+            <div>
+                <label for="floor_height">Height:</label>
+                <input type="number" id="floor_height" name="floor_height" value="{{ floor.height }}" required>
+            </div>
+            <div>
+                <label for="floor_color">Color:</label>
+                <input type="color" id="floor_color" name="floor_color" value="{{ floor.color }}" required>
+            </div>
+        </div>
+        <button type="submit">Update Floor</button>
+    </div>
+</form>
+
+<form method="POST" action="{% url 'draw_shape' %}">
+    {% csrf_token %}
+    <div class="form-section">
+        <h2>Draw Your Shapes</h2>
+        <div class="form-group">
+            <div>
+                <label for="shape_width">Width:</label>
+                <input type="number" id="shape_width" name="shape_width" required>
+            </div>
+            <div>
+                <label for="shape_height">Height:</label>
+                <input type="number" id="shape_height" name="shape_height" required>
+            </div>
+            <div>
+                <label for="shape_x">X Position:</label>
+                <input type="number" id="shape_x" name="shape_x" required>
+            </div>
+            <div>
+                <label for="shape_y">Y Position:</label>
+                <input type="number" id="shape_y" name="shape_y" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <div>
+                <label for="shape_color">Color:</label>
+                <input type="color" id="shape_color" name="shape_color" required>
+            </div>
+            <div>
+                <label for="shape_name">Name:</label>
+                <input type="text" id="shape_name" name="shape_name" required>
+            </div>
+        </div>
+    </div>
+    <button type="submit">Draw Shape</button>
+</form>
+
+<div id="floor" class="grid" style="width: {{ floor.width }}px; height: {{ floor.height }}px; background-color: {{ floor.color }};">
+    {% for shape in shapes %}
+    <div class="shape" style="width: {{ shape.width }}px; height: {{ shape.height }}px; background-color: {{ shape.color }}; left: {{ shape.x }}px; top: {{ shape.y }}px;">{{ shape.name }}</div>
+    {% endfor %}
+</div>
+
+<h2>Shapes List</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Width</th>
+            <th>Height</th>
+            <th>X</th>
+            <th>Y</th>
+            <th>Color</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for shape in shapes %}
+        <tr>
+            <td>{{ shape.name }}</td>
+            <td>{{ shape.width }}</td>
+            <td>{{ shape.height }}</td>
+            <td>{{ shape.x }}</td>
+            <td>{{ shape.y }}</td>
+            <td style="background-color: {{ shape.color }};"></td>
+            <td>
+                <form method="POST" style="display:inline;" action="{% url 'delete_shape' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="shape_id" value="{{ shape.id }}">
+                    <button type="submit" name="delete">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
