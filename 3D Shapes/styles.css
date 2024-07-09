@@ -1,0 +1,73 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: sans-serif;
+}
+
+body {
+    height: 100vh;
+    background-color: red;
+}
+
+.container {
+    height: 60vh;
+    width: 30vw;
+    position: absolute;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+    perspective: 1000px;
+}
+
+.box {
+    height: 250px;
+    width: 250px;
+    position: absolute;
+    top: 100px;
+    left: 100px;
+    transform-style: preserve-3d;
+}
+
+.card {
+    height: 250px;
+    width: 250px;
+    text-align: center;
+    padding: 100px 0px;
+    color: white;
+    background: orange;
+    border: 2px solid white;
+    font-size: 32px;
+    box-sizing: border-box;
+    position: absolute;
+}
+
+#floor {
+    transform: rotateX(-90deg) translateZ(-250px) translateX(-350px);
+    height: 1000px;
+    width: 1000px;
+    background: greenyellow;
+}
+
+#front {
+    transform: translateZ(125px);
+}
+
+#back {
+    transform: translateZ(-125px) rotateY(180deg);
+}
+
+#left {
+    transform: rotateY(-90deg) translateZ(125px);
+}
+
+#right {
+    transform: rotateY(90deg) translateZ(125px);
+}
+
+#top {
+    transform: rotateX(90deg) translateZ(125px);
+}
+
+#bottom {
+    transform: rotateX(-90deg) translateZ(125px);
+}
